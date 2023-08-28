@@ -11,8 +11,9 @@
 
 # Dependencies
 - `sudo gpasswd -a pi wheel`
-- `sudo apt install python3-pip`
+- `sudo apt install python3-periphery`
 - `sudo apt install python3-paho-mqtt`
+- `sudo apt install python3-sdnotify`
 - `pip install sdnotify`
 
 # Add credentials
