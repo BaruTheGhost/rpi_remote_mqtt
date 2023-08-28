@@ -10,14 +10,14 @@
 - `mosquitto_pub -h host -p 8883 -u user -P pass -t sauna/output/temperature_inside -m "99.4"`
 
 # Dependencies
-`sudo gpasswd -a pi wheel`
-`sudo apt install python3-pip`
-`sudo apt install python3-paho-mqtt`
-`pip install sdnotify`
+- `sudo gpasswd -a pi wheel`
+- `sudo apt install python3-pip`
+- `sudo apt install python3-paho-mqtt`
+- `pip install sdnotify`
 
 # Add credentials
-`cp mqtt/credentials.py.template mqtt/credentials.py`
-Edit the file as needed.
+- `cp mqtt/credentials.py.template mqtt/credentials.py`
+- Edit the file as needed.
 
 # Test run
 
