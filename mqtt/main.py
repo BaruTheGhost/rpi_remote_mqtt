@@ -13,16 +13,8 @@ sys.path.append(parentdir)
 from common.thread_monitor import ThreadMonitor, ThreadMonitorExitStrategySystemdWatchdog
 from common import log
 
-if credentials.project == "ekofarma":
-    import logic_ekofarma as logic
-elif credentials.project == "grijanje":
-    import logic_grijanje as logic
-elif credentials.project == "rmale":
-    import logic_rmale as logic
-elif credentials.project == "sauna":
+if credentials.project == "sauna":
     import logic_sauna as logic
-elif credentials.project == "autofarmika":
-    import logic_autofarmika as logic
 
 logger = log.get()
 logger.setLevel("INFO")
