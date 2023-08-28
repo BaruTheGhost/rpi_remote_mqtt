@@ -88,8 +88,12 @@ class Relay:
 
 uptime = Uptime()
 ip = Ip()
+temperature_outside = Temperature(0, "outside")
 temperature_inside = Temperature(1, "inside")
+light = Relay("light", 0)
 heater_1 = Relay("heater_1", 1)
+heater_2 = Relay("heater_2", 2)
+heater_3 = Relay("heater_3", 3)
 
 
 def init():
@@ -98,23 +102,39 @@ def init():
     rpi_peripherals.init()
     uptime.init()
     ip.init()
+    temperature_outside.init()
     temperature_inside.init()
+    light.init()
     heater_1.init()
+    heater_2.init()
+    heater_3.init()
     logger.info("[LGC]: init end")
 
 
 def get_mqtt():
     if uptime.has_mqtt(): return uptime.get_mqtt()
     if ip.has_mqtt(): return ip.get_mqtt()
+    if temperature_outside.has_mqtt(): return temperature_outside.get_mqtt()
     if temperature_inside.has_mqtt(): return temperature_inside.get_mqtt()
+    if light.has_mqtt(): return light.get_mqtt()
     if heater_1.has_mqtt(): return heater_1.get_mqtt()
+    if heater_2.has_mqtt(): return heater_2.get_mqtt()
+    if heater_3.has_mqtt(): return heater_3.get_mqtt()
     return None, None
 
 
 def set_mqtt(topic, message):
     logger.info("[LGC]: set_mqtt %s %s" % (topic, message))
-    if topic == heater_1.name:
+    if topic == light.name:
+        light.set(int(message))
+    elif topic == heater_1.name:
         heater_1.set(int(message))
+    elif topic == heater_2.name:
+        heater_2.set(int(message))
+    elif topic == heater_3.name:
+        heater_3.set(int(message))
+    elif topic == temperature_outside.name:
+        temperature_outside.set(float(message))
     elif topic == temperature_inside.name:
         temperature_inside.set(float(message))
 
@@ -122,10 +142,14 @@ def set_mqtt(topic, message):
 def loop_unblocking():
     uptime.loop()
     ip.loop()
+    light.loop()
     heater_1.loop()
+    heater_2.loop()
+    heater_3.loop()
 
 
 def loop_blocking():
+    temperature_outside.loop()
     temperature_inside.loop()
 
 
